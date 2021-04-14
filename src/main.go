@@ -2,16 +2,17 @@ package main
 
 import (
 	"bufio"
+	"erchess/src/commands"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
 	printLogo()
 	for {
 		input := readInput()
-		fmt.Println(input)
-		parseInput()
+		go commands.ReceiveArgumentsAndStartAccordingly(parseInput(input))
 	}
 }
 
@@ -21,13 +22,13 @@ func printLogo(){
 
 func readInput() string{
 	var input string
-	fmt.Print("-> ")
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	input = scanner.Text()
 	return input
 }
 
-func parseInput(){
-	
+func parseInput(input string) []string {
+	res := strings.Split(input, " ")
+	return res
 }
